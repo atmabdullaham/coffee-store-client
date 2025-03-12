@@ -1,7 +1,37 @@
 import React from "react";
+import Swal from "sweetalert2";
 
-const CoffeeCard = ({ coffee, onDelete, onUpdate, onDetails }) => {
-  const { name, quantity, supplier, taste, category, details, photo } = coffee;
+const CoffeeCard = ({ coffee }) => {
+  const { _id, name, quantity, supplier, taste, category, details, photo } =
+    coffee;
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/coffee/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.deletedCount > 0) {
+              Swal.fire({
+                title: "Deleted!",
+                text: `${name} has been deleted`,
+                icon: "success",
+              });
+            }
+          });
+      }
+    });
+  };
 
   return (
     <div className="card w-80 bg-base-100 shadow-xl rounded-2xl border border-gray-200">
@@ -28,19 +58,19 @@ const CoffeeCard = ({ coffee, onDelete, onUpdate, onDetails }) => {
 
         <div className="mt-4 flex justify-between">
           <button
-            onClick={onDelete}
+            onClick={() => handleDelete(_id)}
             className="btn btn-error btn-sm text-white"
           >
             Delete
           </button>
           <button
-            onClick={onUpdate}
+            // onClick={onUpdate}
             className="btn btn-warning btn-sm text-white"
           >
             Update
           </button>
           <button
-            onClick={onDetails}
+            // onClick={onDetails}
             className="btn btn-info btn-sm text-white"
           >
             Details
