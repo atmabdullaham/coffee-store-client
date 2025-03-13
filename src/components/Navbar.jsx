@@ -32,9 +32,6 @@ const Navbar = () => {
             <NavLink to="/addCoffee">
               <a>Add</a>
             </NavLink>
-            <NavLink to="/updateCoffee">
-              <a>Update</a>
-            </NavLink>
           </ul>
         </div>
         <a className="btn btn-ghost text-2xl font-rancho">Espresso Emporium</a>
@@ -47,13 +44,18 @@ const Navbar = () => {
           <NavLink to="/addCoffee">
             <a>Add</a>
           </NavLink>
-          <NavLink to="/updateCoffee">
-            <a>Update</a>
+          <NavLink to="/users-list">
+            <a>Users</a>
           </NavLink>
         </ul>
       </div>
-      <div className="navbar-end">
-        <a className="btn">Button</a>
+      <div className="navbar-end font-rancho text-xl font-medium">
+        <NavLink to="/login">
+          <a className="btn">SignIn</a>
+        </NavLink>
+        <NavLink to="/register">
+          <a className="btn">SignUp</a>
+        </NavLink>
       </div>
     </div>
   );
