@@ -1,7 +1,8 @@
 import React from "react";
 import Swal from "sweetalert2";
+import { NavLink } from "react-router-dom";
 
-const CoffeeCard = ({ coffee }) => {
+const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
   const { _id, name, quantity, supplier, taste, category, details, photo } =
     coffee;
   const handleDelete = (id) => {
@@ -29,6 +30,8 @@ const CoffeeCard = ({ coffee }) => {
               });
             }
           });
+        const remaining = coffees.filter((cof) => cof._id !== _id);
+        setCoffees(remaining);
       }
     });
   };
@@ -63,12 +66,14 @@ const CoffeeCard = ({ coffee }) => {
           >
             Delete
           </button>
-          <button
-            // onClick={onUpdate}
-            className="btn btn-warning btn-sm text-white"
-          >
-            Update
-          </button>
+          <NavLink to={`updateCoffee/${_id}`}>
+            <button
+              // onClick={onUpdate}
+              className="btn btn-warning btn-sm text-white"
+            >
+              Update
+            </button>
+          </NavLink>
           <button
             // onClick={onDetails}
             className="btn btn-info btn-sm text-white"
